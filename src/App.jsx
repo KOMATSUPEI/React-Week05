@@ -43,6 +43,20 @@ function App() {
 
   const [qtySelect, setQtySelect] = useState(1);
 
+  // 加入購物車
+  const addCartItem=async(product_id,qty)=>{
+    try{
+      await axios.post(`${BASE_URL}/v2/api/${API_PATH}/cart`,{
+        data:{
+          product_id,
+          qty:Number(qty)
+        }
+      });
+    }catch(err){
+      alert("加入購物車失敗");
+    }
+  }
+
   return (
     <div className="container">
       <div className="mt-4">
@@ -79,7 +93,7 @@ function App() {
                     >
                       查看更多
                     </button>
-                    <button type="button" className="btn btn-outline-danger">
+                    <button type="button" className="btn btn-outline-danger" onClick={()=>addCartItem(product.id,1)}>
                       加到購物車
                     </button>
                   </div>
@@ -139,7 +153,7 @@ function App() {
                 </div>
               </div>
               <div className="modal-footer">
-                <button type="button" className="btn btn-primary">
+                <button type="button" className="btn btn-primary" onClick={()=>addCartItem(tempProduct.id,qtySelect)}>
                   加入購物車
                 </button>
               </div>
