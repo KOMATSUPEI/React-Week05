@@ -93,6 +93,21 @@ function App() {
       }
     };
 
+    // 調整購物車產品數量
+    const updateCartItem=async(cartItem_id,product_id,qty)=>{
+      try{
+        await axios.put(`${BASE_URL}/v2/api/${API_PATH}/cart/${cartItem_id}`,{
+          data:{
+            product_id,
+            qty:Number(qty)
+          }
+        });
+        getCart();
+      }catch(err){
+        alert("購物車數量更新失敗");
+      }
+    };
+
   return (
     <div className="container">
       <div className="mt-4">
@@ -229,6 +244,8 @@ function App() {
                           <button
                             type="button"
                             className="btn btn-outline-dark btn-sm"
+                            onClick={()=>updateCartItem(cartItem.id,cartItem.product_id,cartItem.qty-1)}
+                            disabled={cartItem.qty===1}
                           >
                             -
                           </button>
@@ -239,6 +256,7 @@ function App() {
                           <button
                             type="button"
                             className="btn btn-outline-dark btn-sm"
+                            onClick={()=>updateCartItem(cartItem.id,cartItem.product_id,cartItem.qty+1)}
                           >
                             +
                           </button>
