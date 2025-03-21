@@ -108,13 +108,13 @@ function App() {
         alert("購物車數量更新失敗");
       }
     };
-
+    // 定義表單變數
     const {
       register,
       handleSubmit,
       formState:{errors}
     }=useForm();
-
+    //提交表單
     const onSubmit=handleSubmit((data)=>{
       console.log(data);
     })
@@ -312,11 +312,10 @@ function App() {
               })}
               id="email"
               type="email"
-              className="form-control"
+              className={`form-control${errors.email && "is-invalid"}`}
               placeholder="請輸入 Email"
             />
-
-            <p className="text-danger my-2"></p>
+            {errors.email && <p className="text-danger my-2">{errors.email.message}</p>}
           </div>
 
           <div className="mb-3">
@@ -325,10 +324,10 @@ function App() {
             </label>
             <input
               id="name"
-              className={`form-control${errors.email && "is-invalid"}`}
+              className="form-control"
               placeholder="請輸入姓名"
             />
-            {errors.email && <p className="text-danger my-2">{errors.email.message}</p>}
+            <p className="text-danger my-2"></p>
           </div>
 
           <div className="mb-3">
