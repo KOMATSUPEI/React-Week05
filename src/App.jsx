@@ -73,6 +73,26 @@ function App() {
     }
   };
 
+    // 清空購物車
+    const removeCart=async()=>{
+      try{
+        await axios.delete(`${BASE_URL}/v2/api/${API_PATH}/carts`);
+        getCart();
+      }catch(err){
+        alert("清空購物車失敗");
+      }
+    };
+
+    // 刪除單一商品
+    const removeCartItem=async(cartItem_id)=>{
+      try{
+        await axios.delete(`${BASE_URL}/v2/api/${API_PATH}/cart/${cartItem_id}`);
+        getCart();
+      }catch(err){
+        alert("刪除商品失敗");
+      }
+    };
+
   return (
     <div className="container">
       <div className="mt-4">
@@ -179,7 +199,7 @@ function App() {
         {cart.carts?.length>0 && (
           <div>
             <div className="text-end py-3">
-              <button className="btn btn-outline-danger" type="button">
+              <button className="btn btn-outline-danger" type="button" onClick={removeCart}>
                 清空購物車
               </button>
             </div>
@@ -198,7 +218,7 @@ function App() {
                 {cart.carts?.map((cartItem)=>(
                   <tr key={cartItem.id}>
                     <td>
-                      <button type="button" className="btn btn-outline-danger btn-sm">
+                      <button type="button" className="btn btn-outline-danger btn-sm" onClick={()=>removeCartItem(cartItem.id)}>
                         x
                       </button>
                     </td>
