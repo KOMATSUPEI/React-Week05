@@ -108,6 +108,7 @@ function App() {
         alert("購物車數量更新失敗");
       }
     };
+
     // 定義表單變數
     const {
       register,
@@ -117,8 +118,30 @@ function App() {
 
     //提交表單
     const onSubmit=handleSubmit((data)=>{
-      console.log(data);
+
+      const {message,...user}=data;//解構出需要的變數
+
+      const userInfo={
+        data:{
+          user,
+          message
+        }
+      };//變數再構築
+      
+      checkout(userInfo);
     })
+
+    //結帳
+    const checkout=async(data)=>{
+      try{
+        const res=await axios.post(`${BASE_URL}/v2/api/${API_PATH}/order`,data);
+        alert("結帳成功");
+        console.log(res);
+      }catch(err){
+        alert("結帳失敗");
+        console.log(err);
+      }
+    };
 
 
   return (
@@ -379,6 +402,7 @@ function App() {
               className="form-control"
               cols="30"
               rows="10"
+              {...register("message")}
             ></textarea>
           </div>
           <div className="text-end">
