@@ -37,7 +37,6 @@ function App() {
         alert("取得產品失敗");
       }finally{
         setTimeout(() => {
-          console.log("關閉 Loading");
           setIsScreenLoading(false);
         }, 3000);
       }
@@ -83,7 +82,6 @@ function App() {
       alert("加入購物車失敗");
     }finally{
       setTimeout(() => {
-        console.log("關閉 Loading");
         setIsLoading(false);
       }, 3000);
     }
@@ -95,15 +93,16 @@ function App() {
       try{
         await axios.delete(`${BASE_URL}/v2/api/${API_PATH}/carts`);
         getCart();
+        alert("購物車成功清空");
       }catch(err){
         alert("清空購物車失敗");
+        console.log(err);
       }finally{
         setTimeout(() => {
-          console.log("關閉 Loading");
           setIsScreenLoading(false);
         }, 3000);
-      }
-    };
+    }
+  };
 
     // 刪除單一商品
     const removeCartItem=async(cartItem_id)=>{
@@ -115,7 +114,6 @@ function App() {
         alert("刪除商品失敗");
       }finally{
         setTimeout(() => {
-          console.log("關閉 Loading");
           setIsScreenLoading(false);
         }, 3000);
       }
@@ -136,7 +134,6 @@ function App() {
         alert("購物車數量更新失敗");
       }finally{
         setTimeout(() => {
-          console.log("關閉 Loading");
           setIsScreenLoading(false);
         }, 3000);
       }
@@ -178,7 +175,6 @@ function App() {
         console.log(err);
       }finally{
         setTimeout(() => {
-          console.log("關閉 Loading");
           setIsScreenLoading(false);
         }, 3000);
       }
