@@ -36,7 +36,10 @@ function App() {
       } catch (error) {
         alert("取得產品失敗");
       }finally{
-        setIsScreenLoading(false);
+        setTimeout(() => {
+          console.log("關閉 Loading");
+          setIsScreenLoading(false);
+        }, 3000);
       }
     };
     getProducts();
@@ -79,7 +82,10 @@ function App() {
     }catch(err){
       alert("加入購物車失敗");
     }finally{
-      setIsLoading(false);
+      setTimeout(() => {
+        console.log("關閉 Loading");
+        setIsLoading(false);
+      }, 3000);
     }
   };
 
@@ -92,7 +98,10 @@ function App() {
       }catch(err){
         alert("清空購物車失敗");
       }finally{
-        setIsScreenLoading(false);
+        setTimeout(() => {
+          console.log("關閉 Loading");
+          setIsScreenLoading(false);
+        }, 3000);
       }
     };
 
@@ -105,7 +114,10 @@ function App() {
       }catch(err){
         alert("刪除商品失敗");
       }finally{
-        setIsScreenLoading(false);
+        setTimeout(() => {
+          console.log("關閉 Loading");
+          setIsScreenLoading(false);
+        }, 3000);
       }
     };
 
@@ -123,7 +135,10 @@ function App() {
       }catch(err){
         alert("購物車數量更新失敗");
       }finally{
-        setIsScreenLoading(false);
+        setTimeout(() => {
+          console.log("關閉 Loading");
+          setIsScreenLoading(false);
+        }, 3000);
       }
     };
 
@@ -162,7 +177,10 @@ function App() {
         alert("結帳失敗");
         console.log(err);
       }finally{
-        setIsScreenLoading(false);
+        setTimeout(() => {
+          console.log("關閉 Loading");
+          setIsScreenLoading(false);
+        }, 3000);
       }
     };
 
@@ -357,9 +375,9 @@ function App() {
             </table>
           </div>
         )}
-
       </div>
 
+      {/* 表單 */}
       <div className="my-5 row justify-content-center">
         <form className="col-md-6" onSubmit={onSubmit}>
           <div className="mb-3">
@@ -446,25 +464,27 @@ function App() {
             ></textarea>
           </div>
           <div className="text-end">
-            <button type="submit" className="btn btn-danger">
+            <button type="submit" className="btn btn-danger" disabled={cart.carts?.length === 0}>
               送出訂單
             </button>
           </div>
         </form>
       </div>
+
       {/* Loading 模板 */}
       {isScreenLoading && (
       <div className="d-flex justify-content-center align-items-center"
         style={{
           position: "fixed",
           inset: 0,
-          backgroundColor: "rgba(255,255,255,0.5)",
+          backgroundColor: "rgba(105, 105, 105, 0.3)",
           zIndex: 999,
         }}
       >
         <ReactLoading type="spin" color="black" width="4rem" height="4rem" />
       </div>
       )}
+
     </div>
   );
 }
